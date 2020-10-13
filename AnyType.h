@@ -90,12 +90,12 @@ template<typename Type>
 inline Type& AnyType::extract_value() const {
 	Type result{};
 
-	if (typeid(result) != typeid(Type)) {
-		throw bad_cast();
-	}
-	else {
+	if (typeid(result) == typeid(Type)) {
 		result = get<Type>(m_data);
 		return result;
+	}
+	else {
+		throw bad_cast();
 	}
 }
 
