@@ -1,38 +1,46 @@
 #include "AnyType.h"
 
-int main() {
+int main()
+{
 	AnyType atype1('b');
 	cout << "atype1.get_type(): " << atype1.get_type() << endl;
 
 	atype1 = 45;
 	cout << "atype1.get_type(): " << atype1.get_type() << endl;
 
-	try {
+	try
+	{
 		atype1 = "hello";
 		cout << "atype1.get_type(): " << atype1.get_type() << endl;
 	}
-	catch (bad_cast& exc) {
+	catch (bad_cast& exc)
+	{
 		cout << "\t/TYPE_GETTING ERROR: " << exc.what() << endl;
 	}
 
 	cout << "\n-----------------------------------------------------\n";
 
-	try {
+	try 
+	{
 		int value = atype1.extract_value<int>();
 		cout << "atype1.extract_value(): " << value << endl;
 	}
-	catch (const bad_cast& ex) {
+	catch (const bad_cast& ex)
+	{
 		cout << "\t/EXTRUCTION ERROR: " << ex.what() << endl;
 	}
 
-	try {
+	try 
+	{
 		bool value = atype1.extract_value<bool>();
 		cout << "atype1.extract_value(): " << value << endl;
 	}
-	catch (const bad_cast& ex) {
+	catch (const bad_cast& ex) 
+	{
 		cout << "\t/EXTRUCTION ERROR: " << ex.what() << endl;
 	}
-	catch (const exception& ex) {
+	catch (const exception& ex)
+	{
 		cout << "\t/EXTRUCTION ERROR: " << ex.what() << endl;
 	}
 
