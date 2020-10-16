@@ -22,13 +22,11 @@ public:
 	AnyType() = default;
 	AnyType(StandartTypes);
 	AnyType(string) = delete;
-
 	AnyType(const AnyType&);
 	AnyType(const AnyType&&) = delete;
 
 	template<typename Type>
 	AnyType& operator=(const Type&);
-
 	AnyType& operator=(const AnyType&);
 
 	string get_type()const;
@@ -44,11 +42,9 @@ private:
 	StandartTypes m_data;
 };
 
-// constructors
 AnyType::AnyType(StandartTypes data) : m_data(data) {}
 AnyType::AnyType(const AnyType& other) : m_data(other.m_data) {};
 
-// operator=
 template<typename Type>
 AnyType& AnyType::operator=(const Type& other)
 {
@@ -70,7 +66,6 @@ AnyType& AnyType::operator=(const AnyType& other)
 	return *this;
 }
 
-// Return type of data
 string AnyType::get_type() const
 {
 	string type = visit([](auto const& data)
@@ -81,7 +76,7 @@ string AnyType::get_type() const
 	return type;
 }
 
-// Extracts value from variant, throw bad variant access
+// Can throw bad variant access
 template<typename Type>
 Type AnyType::extract_value() const
 {
@@ -89,7 +84,6 @@ Type AnyType::extract_value() const
 	return result;
 }
 
-// Swap two objects
 void AnyType::swap(AnyType& other)
 {
 	StandartTypes to_swap = this->m_data;
@@ -97,7 +91,6 @@ void AnyType::swap(AnyType& other)
 	other.m_data = to_swap;
 }
 
-// Return index for string
 const int AnyType::get_index(const string& str) const
 {
 	if ("char" == str)return CHAR_DATA;
